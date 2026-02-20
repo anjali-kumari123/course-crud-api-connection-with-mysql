@@ -3,7 +3,6 @@ const app = express();
 const db = require("./db");
 app.use(express.json());
 
-//http://localhost:2000/NewCourse/add
 // new course add
 app.post("/NewCourse/add", (request, response) => {
   const { course_name, duration, total_semesters, fees } = request.body;
@@ -29,7 +28,6 @@ app.post("/NewCourse/add", (request, response) => {
   );
 });
 
-//http://localhost:2000/allCourse
 // all courses get
 app.get("/allCourse", (request, response) => {
   const sql = "SELECT * FROM courses";
@@ -108,7 +106,7 @@ app.delete("/deleteCourse/:course_id", (request, response) => {
   db.query(sql, [cId], (error, result) => {
     if (error) {
       return response.status(500).json({
-        message: "Server internal error:"+error,
+        message: "Server internal error:" + error,
       });
     }
     if (result.affectedRows === 0) {
@@ -118,7 +116,7 @@ app.delete("/deleteCourse/:course_id", (request, response) => {
     }
     response.status(200).json({
       message: "course Deleted Successfully",
-       cId
+      cId,
     });
   });
 });
